@@ -16,12 +16,14 @@ class Book extends Model
     */
 
     protected $table = 'books';
-    // protected $primaryKey = 'id';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $fillable = ['title','author','author_id','author_bio', 'title_slug','isbn13',
+    'isbn10','price','format','publisher','pubdate','edition','lexile','subjects','pages',
+        'dimensions','overview','synopsis','excerpt','toc','editorial_reviews'];
     // protected $hidden = [];
-    // protected $dates = [];
+     protected $dates = ['pubdate'];
 
     /*
     |--------------------------------------------------------------------------
@@ -34,6 +36,16 @@ class Book extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function author(){
+        return $this->belongsTo('App\Models\Author');
+    }
+
+    public function categories(){
+        return $this->belongsToMany('App\Models\Category','book_category','book_id','category_id');
+    }
+    public function subcategories(){
+        return $this->belongsToMany('App\Models\Subcategory','book_category','book_id','subcategory_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

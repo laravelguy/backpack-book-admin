@@ -33,8 +33,45 @@ class CategoryCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        // TODO: remove setFromDb() and manually define Fields and Columns
-        $this->crud->setFromDb();
+        $this->crud->setColumns(['title', 'subject_id','slug', 'count']);
+
+        $this->crud->setColumnDetails('subject_id',[
+           'name' => 'subject_id',
+            'type' => 'select',
+            'label' => 'Subject',
+            'entity' => 'subject',
+            'attribute' => 'title',
+            'model' => 'App\Models\Subject',
+        ]);
+
+        $this->crud->addField([
+            'name' => 'title',
+            'type' => 'text',
+            'label' => "Title"
+        ]);
+
+        $this->crud->addField([
+           'name' => 'subject_id',
+            'type' => 'select2',
+            'label' => 'Subject',
+            'entity' => 'subject',
+            'attribute' => 'title',
+            'model' => 'App\Models\Subject',
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'ASC')->get();
+            })
+        ]);
+
+        $this->crud->addField([
+            'name' => 'slug',
+            'type' => 'text',
+            'label' => "Slug"
+        ]);
+        $this->crud->addField([
+           'name' => 'count',
+            'type' => 'number',
+            'label' => 'Number of entity'
+        ]);
 
         // add asterisk for fields that are required in CategoryRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');

@@ -16,10 +16,10 @@ class Category extends Model
     */
 
     protected $table = 'categories';
-    // protected $primaryKey = 'id';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $fillable = ['title','subject_id','slug','count'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -34,6 +34,12 @@ class Category extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function subject(){
+        return $this->belongsTo('App\Models\Subject');
+    }
+    public function subcategories(){
+        return $this->hasMany('App\Models\Subcategory');
+    }
 
     /*
     |--------------------------------------------------------------------------

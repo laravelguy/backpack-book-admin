@@ -19,7 +19,7 @@ class Subcategory extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $fillable = ['title', 'category_id','slug','count'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -34,7 +34,9 @@ class Subcategory extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+    public function category(){
+        return $this->belongsTo('App\Models\Category');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

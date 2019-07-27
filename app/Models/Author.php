@@ -19,7 +19,7 @@ class Author extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $fillable = ['title','slug','biography'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -34,7 +34,9 @@ class Author extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+    public function books(){
+        return $this->hasMany('App\Models\Book');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

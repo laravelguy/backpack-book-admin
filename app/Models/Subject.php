@@ -16,10 +16,10 @@ class Subject extends Model
     */
 
     protected $table = 'subjects';
-    // protected $primaryKey = 'id';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $fillable = ['title','slug'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -34,7 +34,9 @@ class Subject extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+    public function categories(){
+        return $this->hasMany('App\Models\Category');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
